@@ -7,7 +7,8 @@ def main(env, provider_id, qna_session_id):
     goal = "http://graph.globality.io/platform/providerHome/industryExperience"
     relation_type = "OPERATES_IN_INDUSTRY"
 
-    test = Test(env, provider_id, qna_session_id, goal, relation_type)
+    test = Test(env, provider_id, qna_session_id, goal, relation_type,
+                test_name=basename(__file__))
     frigg_data = test.get_frigg_data()
     print("********** frigg **********")
     sorted_frigg_obj_values = test.get_frigg_obj_values(frigg_data)
@@ -25,8 +26,6 @@ def main(env, provider_id, qna_session_id):
 
     test.compare_all_obj_values(sorted_frigg_obj_values,
                                 sorted_miranda_obj_values, sorted_sphinx_data)
-
-
 
 
 if __name__ == "__main__":

@@ -8,12 +8,14 @@ def output(data):
 
 
 class Test(object):
-    def __init__(self, env, provider_id, qna_session, goal, relation_type):
+    def __init__(self, env, provider_id, qna_session, goal,
+                 relation_type, test_name=""):
         self.env = env
         self.provider_id = provider_id
         self.qna_session = qna_session
         self.goal = goal
         self.relation_type = relation_type
+        self.test_name = test_name
 
     def get_response(self, url):
         max_attempts = 5
@@ -23,7 +25,7 @@ class Test(object):
                 return res
 
         raise Exception("Test '{0}' failed => Getting response from '{1}' "
-                        "failed after {2} attempts".format(basename(__file__),
+                        "failed after {2} attempts".format(self.test_name,
                                                            url, max_attempts))
 
     def get_frigg_data(self):
@@ -81,4 +83,4 @@ class Test(object):
         else:
             raise Exception("Test '{}' failed => Mismatch found among "
                             "frigg_obj_values, miranda_obj_values and "
-                            "sphinx_obj_values".format(basename(__file__)))
+                            "sphinx_obj_values".format(self.test_name))
